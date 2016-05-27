@@ -31,9 +31,28 @@
 
   <script src="js/shp.min.js"></script>
       <script>
+
+
+
+      function data(data) {
+            shp(data).then(function(geoJson){
+              console.log(geoJson)
+            });
+
+      }
+      function readerLoad() {
+          if (this.readyState !== 2 || this.error) {
+              return;
+          }
+          else {
+              data(this.result);
+          }
+      }
+
       function handleZipFile(file) {
 
           var reader = new FileReader();
+          reader.onload = readerLoad;
           reader.readAsArrayBuffer(file);
       }
 
