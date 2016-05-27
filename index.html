@@ -31,8 +31,20 @@
 
   <script src="js/shp.min.js"></script>
       <script>
+      function handleZipFile(file) {
+
+          var reader = new FileReader();
+          reader.onload = readerLoad;
+          reader.readAsArrayBuffer(file);
+      }
+
       function convert(self){
-        console.log(self.files[0])
+        var file = self.files[0]
+
+        if (file.name.slice(-3) === 'zip') {
+            var f =  handleZipFile(file);
+            console.log(f)
+        }
         // shp('files/shapeFile.zip').then(function(data){
         //   console.log(data)
         // });
