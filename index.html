@@ -22,7 +22,7 @@
         <div class="form-group">
           <label for="exampleInputFile">File input</label>
           <form class="bgroup leaflet-control" id="dropzone">
-            <input class="upStuff" type="file" id="input" onchange="function(){console.log(this.files)}">
+            <input class="upStuff" type="file" id="input" onchange="convert()">
           </form>
         </div>
       </div>
@@ -32,9 +32,10 @@
   <script src="js/shp.min.js"></script>
       <script>
       function convert(){
-        shp('files/shapeFile.zip').then(function(data){
-          console.log(data)
-        });
+        console.log(this.files)
+        // shp('files/shapeFile.zip').then(function(data){
+        //   console.log(data)
+        // });
       }
       </script>
 </body>
