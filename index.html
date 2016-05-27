@@ -23,6 +23,8 @@
           <label for="exampleInputFile">File input</label>
           <form class="bgroup leaflet-control" id="dropzone">
             <input class="upStuff" type="file" id="input" onchange="convert(this)">
+            <div class="well" id="thegeojson"></div>
+
           </form>
         </div>
       </div>
@@ -36,8 +38,9 @@
 
       function data(data) {
             shp(data).then(function(geoJson){
-              console.log(geoJson)
-            }); 
+              // console.log(geoJson)
+              $("#thegeojson").text(geoJson)
+            });
 
       }
       function readerLoad() {
