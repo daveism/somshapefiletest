@@ -1,2 +1,2 @@
 # somshapefiletest
-daveism.github.com/somshapefiletes
+http://daveism.github.io/somshapefiletest
