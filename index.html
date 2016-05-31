@@ -50,7 +50,7 @@
               shp_GeoJSON = JSON.stringify(geoJson)
               var errors = geojsonhint.hint(shp_GeoJSON);
               console.log(errors)
-              if(console.error.length === 0 || geoJson.features.length > 0){
+              if(error.length >= 0 || geoJson.features.length === 0){
                 $("#thegeojson").text(shp_GeoJSON)
               } else {
                 $("#thegeojson").text('GeoJSON is not valid or there are not GeoJSON features!' )
