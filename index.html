@@ -55,60 +55,29 @@
 
               zip.forEach(function (relativePath, zipEntry) {
                 var ext = zipEntry.name.slice(-3).toLowerCase();
-                console.log(ext)
                 hasExt.push(ext);
-                //if (needsExt.indexOf(ext) >= 0){
-                //  hasExt.push(ext)
-                //  console.log( zipEntry.name + " has " + ext)
-                //}
-
               });
 
               needsExt = MustHaveExt.filter(function(val) {
                 return hasExt.indexOf(val) == -1;
               });
-              console.log(MustHaveExt)
-              console.log(hasExt)
-              console.log(needsExt)
 
-              if (needsExt.length>0){
-                console.log("error missing " + needsExt + " files!" )
-              }
             }, function (e) {
               console.log("Error reading " + file.name + " : " + e.message)
             });
 
-
-
-
-      	// 	if (key.slice(-3).toLowerCase() === 'shp') {
-        //     console.log('shp exists')
-      	// 		names.push(key.slice(0, - 4));
-      	// 		zip[key.slice(0, -3) + key.slice(-3).toLowerCase()] = zip[key];
-      	// 	}
-      	// 	else if (key.slice(-3).toLowerCase() === 'dbf') {
-        //     console.log('dbg exists')
-      	// 		zip[key.slice(0, -3) + key.slice(-3).toLowerCase()] = parseDbf(zip[key]);
-      	// 	}
-      	// 	else if (key.slice(-3).toLowerCase() === 'prj') {
-        //     console.log('prj exists')
-      	// 		zip[key.slice(0, -3) + key.slice(-3).toLowerCase()] = proj4(zip[key]);
-      	// 	}
-      	// }
-      	// if (!names.length) {
-      	// 	throw new Error('no layers founds');
-      	// }
+        return needsExt
       }
 
       function data(data) {
 
-            checkfile(data)
+            needsExt = checkfile(data)
             shp(data).then(function(geoJson){
 
               shp_GeoJSON = JSON.stringify(geoJson)
               var errors = geojsonhint.hint(shp_GeoJSON);
               console.log(errors)
-
+              console.log(needsExt)
               if(geoJson.features.length === 0){
                 $("#thegeojson").text('No features')
               }else{
