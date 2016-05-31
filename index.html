@@ -71,14 +71,16 @@
               return needsExt
             }, function (e) {
               console.log("Error reading " + file.name + " : " + e.message)
-            });
+            }).catch(e){
+              console.log(e)
+            };
 
         //return needsExt
       }
 
       function data(data) {
 
-            needsExt = checkfile(data)
+            checkfile(data)
             shp(data).then(function(geoJson){
 
               shp_GeoJSON = JSON.stringify(geoJson)
