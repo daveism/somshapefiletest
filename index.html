@@ -71,9 +71,9 @@
               return needsExt
             }, function (e) {
               console.log("Error reading " + file.name + " : " + e.message)
-            }).catch(e){
-              console.log(e)
-            };
+            }).catch(function(e) {
+              console.log(e); // "oh, no!"
+            });
 
         //return needsExt
       }
