@@ -61,8 +61,12 @@
               needsExt = MustHaveExt.filter(function(val) {
                 return hasExt.indexOf(val) == -1;
               });
-              console.log(needsExt)
-              return needsExt
+
+              if (needsExt > 0){
+                throw new Error("missing files with these extensions")
+              }
+              // console.log(needsExt)
+              // return needsExt
             }, function (e) {
               console.log("Error reading " + file.name + " : " + e.message)
             });
