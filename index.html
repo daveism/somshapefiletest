@@ -52,7 +52,7 @@
               // console.log(geoJson)
               shp_GeoJSON = JSON.stringify(geoJson)
               var errors = geojsonhint.hint(shp_GeoJSON);
-              console.log(errors) 
+              console.log(errors)
               $("#thegeojson").text(shp_GeoJSON)
             });
 
@@ -62,7 +62,7 @@
               return;
           }
           else {
-              console.log(this)
+              //console.log(this)
               data(this.result);
           }
       }
@@ -79,7 +79,7 @@
 
         if (file.name.slice(-3) === 'zip') {
             var f =  handleZipFile(file);
-            console.log(f)
+            //console.log(f)
         }
         // shp('files/shapeFile.zip').then(function(data){
         //   console.log(data)
