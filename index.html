@@ -55,15 +55,15 @@
 
                 if (zipEntry.name.slice(-3).toLowerCase() === 'shp') {
                   console.log('shp exists')
-            			names.push(zipEntry.name).slice(0, - 4));
+            			names.push(zipEntry.name.slice(0, - 4));
             		}
             		else if (zipEntry.name.slice(-3).toLowerCase() === 'dbf') {
                   console.log('dbf exists')
-                  names.push(zipEntry.name).slice(0, - 4));
+                  names.push(zipEntry.name.slice(0, - 4));
             		}
             		else if (zipEntry.name.slice(-3).toLowerCase() === 'prj') {
                   console.log('prj exists')
-                  names.push(zipEntry.name).slice(0, - 4));
+                  names.push(zipEntry.name.slice(0, - 4));
             		}
             	}
             	if (!names.length) {
