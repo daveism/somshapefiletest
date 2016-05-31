@@ -44,6 +44,39 @@
   <script src="js/geojsonhint.js"></script>
       <script>
 
+      function checkfile(file){
+        var names = [];
+
+        JSZip.loadAsync(file)
+            .then(function(zip) {
+              var dateAfter = new Date();
+              zip.forEach(function (relativePath, zipEntry) {
+                console.log(zipEntry.name)
+
+                if (zipEntry.name).slice(-3).toLowerCase() === 'shp') {
+                  console.log('shp exists')
+            			names.push(zipEntry.name).slice(0, - 4));
+            		}
+            		else if (zipEntry.name).slice(-3).toLowerCase() === 'dbf') {
+                  console.log('dbf exists')
+                  names.push(zipEntry.name).slice(0, - 4));
+            		}
+            		else if (zipEntry.name.slice(-3).toLowerCase() === 'prj') {
+                  console.log('prj exists')
+                  names.push(zipEntry.name).slice(0, - 4));
+            		}
+            	}
+            	if (!names.length) {
+            		throw new Error('no layers founds');
+            	}
+              });
+            }, function (e) {
+              console.log("Error reading " + f.name + " : " + e.message)
+            });
+
+
+      }
+
       function data(data) {
 
 
@@ -73,16 +106,7 @@
 
       function handleZipFile(file) {
 
-        JSZip.loadAsync(file)
-            .then(function(zip) {
-              var dateAfter = new Date();
-              zip.forEach(function (relativePath, zipEntry) {
-                console.log(zipEntry.name)
-              });
-            }, function (e) {
-                    console.log("Error reading " + f.name + " : " + e.message)
 
-                  });
 
           var reader = new FileReader();
           reader.onload = readerLoad;
