@@ -49,7 +49,7 @@
         var hasExt = []
         var needsExt = []
 
-        needsExt = JSZip.loadAsync(file)
+        JSZip.loadAsync(file)
             .then(function(zip) {
               var dateAfter = new Date();
 
