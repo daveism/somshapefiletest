@@ -52,7 +52,7 @@
               // console.log(geoJson)
               shp_GeoJSON = JSON.stringify(geoJson)
               var errors = geojsonhint.hint(shp_GeoJSON);
-              console.log(errors)
+              console.log(errors) 
               $("#thegeojson").text(shp_GeoJSON)
             });
 
