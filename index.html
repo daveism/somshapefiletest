@@ -45,7 +45,7 @@
       <script>
 
       function data(data) {
-            shp(data).then(function(geoJson){ 
+            shp(data).then(function(geoJson){
               // console.log(geoJson)
               shp_GeoJSON = JSON.stringify(geoJson)
               var errors = geojsonhint.hint(shp_GeoJSON);
@@ -55,6 +55,9 @@
               //} else {
               //  $("#thegeojson").text('GeoJSON is not valid or there are not GeoJSON features!' )
               //}
+              if(geoJson.features.length > 0){
+                console.log('no features')
+              }
             });
 
       }
