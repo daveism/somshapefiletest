@@ -48,7 +48,7 @@
         var MustHaveExt = ['prj','dbf','shp']
         var hasExt = []
         var needsExt = []
-        
+
         JSZip.loadAsync(file)
             .then(function(zip) {
               var dateAfter = new Date();
@@ -69,7 +69,8 @@
             needsExt = MustHaveExt.filter(function(val) {
               return hasExt.indexOf(val) == -1;
             });
-            console.log(needsExt)
+            console.log(MustHaveExt)
+            console.log(hasExt)
 
       	// 	if (key.slice(-3).toLowerCase() === 'shp') {
         //     console.log('shp exists')
