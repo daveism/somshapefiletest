@@ -85,7 +85,7 @@
 
             checkfile(data);
 
-            shp(data).then(function(geoJson){
+            shp(data).then(function(geoJson){ 
               shp_GeoJSON = JSON.stringify(geoJson)
               var errors = geojsonhint.hint(shp_GeoJSON);
 
