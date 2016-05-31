@@ -40,63 +40,12 @@
   </div>
 
   <script src="js/shp.min.js"></script>
-  <script src="js/zip.js"></script>
+  <script src="js/jszip.min.js"></script>
   <script src="js/geojsonhint.js"></script>
       <script>
 
       function data(data) {
 
-        // use a BlobReader to read the zip from a Blob object
-        zip.createReader(new zip.BlobReader(data), function(reader) {
-
-          // get all entries from the zip
-          reader.getEntries(function(entries) {
-            if (entries.length) {
-
-              // get first entry content as text
-              entries[0].getData(new zip.TextWriter(), function(text) {
-                // text contains the entry data as a String
-                console.log(text);
-
-                // close the zip reader
-                reader.close(function() {
-                  // onclose callback
-                });
-
-              }, function(current, total) {
-                // onprogress callback
-              });
-            }
-          });
-        }, function(error) {
-          // onerror callback
-        });
-
-        // var key;
-      	// var zip = unzip(data);
-      	// var names = [];
-      	// for (key in zip) {
-      	// 	if (key.indexOf('__MACOSX') !== -1) {
-      	// 		continue;
-      	// 	}
-      	// 	if (key.slice(-3).toLowerCase() === 'shp') {
-        //     console.log('shp exists')
-      	// 		names.push(key.slice(0, - 4));
-      	// 		zip[key.slice(0, -3) + key.slice(-3).toLowerCase()] = zip[key];
-      	// 	}
-      	// 	else if (key.slice(-3).toLowerCase() === 'dbf') {
-        //     console.log('dbg exists')
-      	// 		zip[key.slice(0, -3) + key.slice(-3).toLowerCase()] = parseDbf(zip[key]);
-      	// 	}
-      	// 	else if (key.slice(-3).toLowerCase() === 'prj') {
-        //     console.log('prj exists')
-      	// 		zip[key.slice(0, -3) + key.slice(-3).toLowerCase()] = proj4(zip[key]);
-      	// 	}
-      	// }
-      	// if (!names.length) {
-      	// 	throw new Error('no layers founds');
-      	// }
-        //
 
             shp(data).then(function(geoJson){
 
