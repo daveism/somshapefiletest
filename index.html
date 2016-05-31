@@ -50,8 +50,12 @@
         JSZip.loadAsync(file)
             .then(function(zip) {
               var dateAfter = new Date();
+              var needsExt = ['prj','dbf','shp']
               zip.forEach(function (relativePath, zipEntry) {
-                console.log(zipEntry.name.slice(-3).toLowerCase())
+                var ext = zipEntry.name.slice(-3).toLowerCase();
+                if (ext in needsExt){
+                  console.log( zipEntry.name + " has " + ext)
+                }
 
               });
             }, function (e) {
