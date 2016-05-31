@@ -67,12 +67,12 @@
 
                 throw new Error("missing files with these extensions")
               }
-              console.log(needsExt)
               return needsExt
             }, function (e) {
               console.log("Error reading " + file.name + " : " + e.message)
             }).catch(function(e) {
               console.log(e); // "oh, no!"
+              return needsExt
             });
 
         //return needsExt
@@ -85,8 +85,7 @@
 
               shp_GeoJSON = JSON.stringify(geoJson)
               var errors = geojsonhint.hint(shp_GeoJSON);
-              //console.log(errors)
-              console.log(needsExt)
+
               if(geoJson.features.length === 0){
                 $("#thegeojson").text('No features')
               }else{
