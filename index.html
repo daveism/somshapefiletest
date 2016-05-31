@@ -50,19 +50,26 @@
         JSZip.loadAsync(file)
             .then(function(zip) {
               var dateAfter = new Date();
-              var needsExt = ['prj','dbf','shp']
+              var MustHaveExt = ['prj','dbf','shp']
+              var hasExt = []
+              var needsExt = []
               zip.forEach(function (relativePath, zipEntry) {
                 var ext = zipEntry.name.slice(-3).toLowerCase();
-                console.log(ext)
-                if (needsExt.indexOf(ext) >= 0){
-                  console.log( zipEntry.name + " has " + ext)
-                }
+                hasExt.push(ext);
+                //if (needsExt.indexOf(ext) >= 0){
+                //  hasExt.push(ext)
+                //  console.log( zipEntry.name + " has " + ext)
+                //}
 
               });
             }, function (e) {
-              console.log("Error reading " + f.name + " : " + e.message)
+              console.log("Error reading " + file.name + " : " + e.message)
             });
 
+            needsExt = MustHaveExt.filter(function(val) {
+              return hasExt.indexOf(val) == -1;
+            });
+            console.log(needsExt)
 
       	// 	if (key.slice(-3).toLowerCase() === 'shp') {
         //     console.log('shp exists')
