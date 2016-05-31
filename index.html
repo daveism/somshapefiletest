@@ -72,8 +72,8 @@
       }
 
       function handleZipFile(file) {
-  
-        JSZip.loadAsync(f)
+
+        JSZip.loadAsync(file)
             .then(function(zip) {
               var dateAfter = new Date();
               zip.forEach(function (relativePath, zipEntry) {
