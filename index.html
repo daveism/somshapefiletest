@@ -62,7 +62,7 @@
                 return hasExt.indexOf(val) == -1;
               });
 
-              if (needsExt > 0){
+              if (needsExt.length > 0){
                 throw new Error("missing files with these extensions")
               }
               // console.log(needsExt)
