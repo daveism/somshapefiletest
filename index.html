@@ -45,14 +45,14 @@
       <script>
 
       function checkfile(file){
-        var names = [];
-
+        var MustHaveExt = ['prj','dbf','shp']
+        var hasExt = []
+        var needsExt = []
+        
         JSZip.loadAsync(file)
             .then(function(zip) {
               var dateAfter = new Date();
-              var MustHaveExt = ['prj','dbf','shp']
-              var hasExt = []
-              var needsExt = []
+
               zip.forEach(function (relativePath, zipEntry) {
                 var ext = zipEntry.name.slice(-3).toLowerCase();
                 hasExt.push(ext);
