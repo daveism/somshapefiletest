@@ -99,7 +99,8 @@
 
           var reader = new FileReader();
           reader.onload = readerLoad;
-          reader.readAsArrayBuffer(file);
+          Return reader.readAsArrayBuffer(file);
+
       }
 
       function convert(self){
@@ -107,13 +108,11 @@
 
         if (file.name.slice(-3) === 'zip') {
             var f =  handleZipFile(file);
-            //console.log(f)
+            console.log(f)
         } else {
           $("#thegeojson").text('shapefiles must be in zip file')
         }
-        // shp('files/shapeFile.zip').then(function(data){
-        //   console.log(data)
-        // });
+
       }
       </script>
 </body>
