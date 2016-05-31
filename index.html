@@ -73,6 +73,26 @@
 
       function handleZipFile(file) {
 
+        JSZip.loadAsync(f)
+            .then(function(zip) {
+              var dateAfter = new Date();
+              $title.append($("<span>", {
+                text:" (loaded in " + (dateAfter - dateBefore) + "ms)"
+              }));
+
+
+              zip.forEach(function (relativePath, zipEntry) {
+                $fileContent.append($("<li>", {
+                  text : zipEntry.name
+                }));
+              });
+            }, function (e) {
+                    $fileContent = $("<div>", {
+                      "class" : "alert alert-danger",
+                      text : "Error reading " + f.name + " : " + e.message
+                    });
+                  });
+                       
           var reader = new FileReader();
           reader.onload = readerLoad;
           return reader.readAsArrayBuffer(file);
