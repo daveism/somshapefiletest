@@ -71,10 +71,11 @@
 
             }, function (e) {
               console.log("Error reading " + file.name + " : " + e.message)
+              return needsExt
             }).catch(function(e) {
               console.log(e); // "oh, no!"
               return needsExt
-            });
+            }).then(function(){return needsExt});
 
         //return needsExt
       }
@@ -82,7 +83,7 @@
       function data(data) {
 
             d = checkfile(data);
-            console.log(d); 
+            console.log(d);
             shp(data).then(function(geoJson){
 
               shp_GeoJSON = JSON.stringify(geoJson)
