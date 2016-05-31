@@ -50,7 +50,7 @@
         var needsExt = []
 
         needsExt = JSZip.loadAsync(file)
-            .done(function(zip) {
+            .then(function(zip) {
               var dateAfter = new Date();
 
               zip.forEach(function (relativePath, zipEntry) {
