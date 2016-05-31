@@ -57,6 +57,7 @@
               console.log("Error reading " + f.name + " : " + e.message)
             });
 
+
       	// 	if (key.slice(-3).toLowerCase() === 'shp') {
         //     console.log('shp exists')
       	// 		names.push(key.slice(0, - 4));
@@ -78,7 +79,7 @@
 
       function data(data) {
 
-
+            checkfile(data)
             shp(data).then(function(geoJson){
 
               shp_GeoJSON = JSON.stringify(geoJson)
