@@ -54,7 +54,7 @@
               zip.forEach(function (relativePath, zipEntry) {
                 var ext = zipEntry.name.slice(-3).toLowerCase();
                 console.log(ext)
-                if (needsExt.indexOf(ext) > 0){
+                if (needsExt.indexOf(ext) >= 0){
                   console.log( zipEntry.name + " has " + ext)
                 }
 
