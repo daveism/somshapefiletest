@@ -49,7 +49,7 @@
         var hasExt = []
         var needsExt = []
 
-        JSZip.loadAsync(file)
+        return JSZip.loadAsync(file)
             .then(function(zip) {
               var dateAfter = new Date();
 
@@ -63,10 +63,11 @@
               });
 
               if (needsExt.length > 1){
-                throw new Error("missing files with these extensions")
+                throw new Error("missing files with these extensions" + needsExt)
+                return needsExt
               }
 
-              return needsExt; 
+              return needsExt;
 
             }, function (e) {
               console.log("Error reading " + file.name + " : " + e.message)
