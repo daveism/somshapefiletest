@@ -61,6 +61,7 @@
               needsExt = MustHaveExt.filter(function(val) {
                 return hasExt.indexOf(val) == -1;
               });
+              console.log(needsExt)
               return needsExt
             }, function (e) {
               console.log("Error reading " + file.name + " : " + e.message)
