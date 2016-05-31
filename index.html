@@ -40,6 +40,9 @@
   </div>
 
   <script src="js/shp.min.js"></script>
+  <script src="js/geojsonhint.js"></script>
+
+
       <script>
 
 
@@ -47,7 +50,10 @@
       function data(data) {
             shp(data).then(function(geoJson){
               // console.log(geoJson)
-              $("#thegeojson").text(JSON.stringify(geoJson))
+              shp_GeoJSON = JSON.stringify(geoJson)
+              var errors = geojsonhint.hint(shp_GeoJSON);
+
+              $("#thegeojson").text(shp_GeoJSON)
             });
 
       }
@@ -57,7 +63,7 @@
           }
           else {
               console.log(this)
-              data(this.result); 
+              data(this.result);
           }
       }
 
