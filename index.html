@@ -77,7 +77,7 @@
               shp_GeoJSON = JSON.stringify(geoJson)
               var errors = geojsonhint.hint(shp_GeoJSON);
               //console.log(errors)
-              console.log('test'+needsExt)
+              console.log(needsExt)
               if(geoJson.features.length === 0){
                 $("#thegeojson").text('No features')
               }else{
