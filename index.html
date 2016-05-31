@@ -70,7 +70,10 @@
               console.log(MustHaveExt)
               console.log(hasExt)
               console.log(needsExt)
-              
+
+              if (needsExt.length>0){
+                console.log("error missing " + needsExt + " files!" )
+              }
             }, function (e) {
               console.log("Error reading " + file.name + " : " + e.message)
             });
