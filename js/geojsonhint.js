@@ -94,7 +94,7 @@ case 1:
                      .replace(/\\v/g,'\v')
                      .replace(/\\f/g,'\f')
                      .replace(/\\b/g,'\b');
-
+        
 break;
 case 2:
 this.$ = Number(yytext);
@@ -142,7 +142,7 @@ case 17:
                 this.$.__duplicateProperties__.push($$[$0][0]);
             }
             $$[$0-2][$$[$0][0]] = $$[$0][1];
-
+        
 break;
 case 18:
 this.$ = []; Object.defineProperty(this.$, '__line__', {
@@ -733,7 +733,7 @@ function hint(gj, options) {
                 message: 'The type ' + _.type + ' is unknown',
                 line: _.__line__
             });
-        } else if (_) {
+        } else {
             types[_.type](_);
         }
     }
@@ -844,10 +844,16 @@ function hint(gj, options) {
                         line: line
                     });
                 }
+            } else if (!Array.isArray(coords)) {
+                errors.push({
+                    message: 'a number was found where a coordinate array should have been found: this needs to be nested more deeply',
+                    line: line
+                });
+            } else {
+                coords.forEach(function(c) {
+                    positionArray(c, type, depth - 1, c.__line__ || line);
+                });
             }
-            coords.forEach(function(c) {
-                positionArray(c, type, depth - 1, c.__line__ || line);
-            });
         }
     }
 
@@ -862,6 +868,11 @@ function hint(gj, options) {
                     requiredProperty(_.crs.properties, 'name', 'string');
                 } else if (_.crs.type === 'link') {
                     requiredProperty(_.crs.properties, 'href', 'string');
+                } else {
+                    errors.push({
+                        message: 'The type of a crs must be either "name" or "link"',
+                        line: _.__line__
+                    });
                 }
             }
         } else {
@@ -947,10 +958,8 @@ function hint(gj, options) {
         crs(geometryCollection);
         bbox(geometryCollection);
         if (!requiredProperty(geometryCollection, 'geometries', 'array')) {
-            if (!everyIs(geometryCollection.features, 'object')) {
+            if (!everyIs(geometryCollection.geometries, 'object')) {
                 errors.push({
-                :qa
-
                     message: 'The geometries array in a GeometryCollection must contain only geometry objects',
                     line: geometryCollection.__line__
                 });
@@ -1045,9 +1054,8 @@ function hint(str, options) {
         try {
             gj = jsonlint.parse(str);
         } catch(e) {
-            var match = e.message.match(/line (\d+)/),
-                lineNumber = 0;
-            if (match) { lineNumber = parseInt(match[1], 10); }
+            var match = e.message.match(/line (\d+)/);
+            var lineNumber = parseInt(match[1], 10);
             return [{
                 line: lineNumber - 1,
                 message: e.message,
@@ -1308,6 +1316,9 @@ var currentQueue;
 var queueIndex = -1;
 
 function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
     draining = false;
     if (currentQueue.length) {
         queue = currentQueue.concat(queue);
