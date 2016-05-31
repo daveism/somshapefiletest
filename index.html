@@ -64,7 +64,7 @@
 
               if (needsExt.length > 1){
                 throw new Error("missing files with these extensions" + needsExt)
-                return needsExt 
+                return needsExt
               }
 
               return needsExt;
@@ -81,7 +81,8 @@
 
       function data(data) {
 
-            checkfile(data)
+            d = checkfile(data)
+            console.log(d)
             shp(data).then(function(geoJson){
 
               shp_GeoJSON = JSON.stringify(geoJson)
