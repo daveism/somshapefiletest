@@ -51,7 +51,8 @@
             .then(function(zip) {
               var dateAfter = new Date();
               zip.forEach(function (relativePath, zipEntry) {
-                console.log(zipEntry.name)
+                console.log(zipEntry.name.slice(-3).toLowerCase())
+
               });
             }, function (e) {
               console.log("Error reading " + f.name + " : " + e.message)
