@@ -76,7 +76,7 @@
 
               shp_GeoJSON = JSON.stringify(geoJson)
               var errors = geojsonhint.hint(shp_GeoJSON);
-              console.log(errors)
+              //console.log(errors)
               console.log('test'+needsExt)
               if(geoJson.features.length === 0){
                 $("#thegeojson").text('No features')
@@ -91,7 +91,7 @@
               return;
           }
           else {
-              console.log(this.result)
+              //console.log(this.result)
               data(this.result);
           }
       }
@@ -110,7 +110,7 @@
 
         if (file.name.slice(-3) === 'zip') {
             var f =  handleZipFile(file);
-            console.log(f)
+            //console.log(f)
         } else {
           $("#thegeojson").text('shapefiles must be in zip file')
         }
