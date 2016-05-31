@@ -53,11 +53,11 @@
               zip.forEach(function (relativePath, zipEntry) {
                 console.log(zipEntry.name)
 
-                if (zipEntry.name).slice(-3).toLowerCase() === 'shp') {
+                if (zipEntry.name.slice(-3).toLowerCase() === 'shp') {
                   console.log('shp exists')
             			names.push(zipEntry.name).slice(0, - 4));
             		}
-            		else if (zipEntry.name).slice(-3).toLowerCase() === 'dbf') {
+            		else if (zipEntry.name.slice(-3).toLowerCase() === 'dbf') {
                   console.log('dbf exists')
                   names.push(zipEntry.name).slice(0, - 4));
             		}
