@@ -64,6 +64,7 @@
 
               if (needsExt.length > 1){
                 throw new Error("missing files with these extensions" + needsExt)
+                $("#thegeojson").text("missing files with these extensions" + needsExt)
                 return needsExt
               }
 
@@ -82,10 +83,9 @@
 
       function data(data) {
 
-            d = checkfile(data);
-            console.log(d._result);
-            shp(data).then(function(geoJson){
+            checkfile(data);
 
+            shp(data).then(function(geoJson){
               shp_GeoJSON = JSON.stringify(geoJson)
               var errors = geojsonhint.hint(shp_GeoJSON);
 
