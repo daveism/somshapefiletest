@@ -62,6 +62,7 @@
                 return hasExt.indexOf(val) == -1;
               });
 
+              console.log(needsExt.length)
               if (needsExt.length > 1){
                 $("#thegeojson").text("missing files with these extensions: " + needsExt)
                 throw new Error("missing files with these extensions: " + needsExt)
@@ -72,7 +73,9 @@
                   var errors = geojsonhint.hint(shp_GeoJSON);
 
                   if(geoJson.features.length === 0){
-                    $("#thegeojson").text('No features')
+                    $("#thegeojson").text('No Features in shapefile')
+                    throw new Error("No Features in shapefile")
+
                   }else{
                     $("#thegeojson").text(shp_GeoJSON)
                   }
