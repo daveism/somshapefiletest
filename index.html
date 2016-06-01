@@ -61,7 +61,21 @@
         return needsExt;
       }
 
-      function convertToGeoJSON(file){
+      function convertToGeoJSON(data){
+        shp(data).then(function(geoJson){
+          shp_GeoJSON = JSON.stringify(geoJson)
+          var errors = geojsonhint.hint(shp_GeoJSON);
+
+          if(geoJson.features.length === 0){
+            $("#thegeojson").text('No Features in shapefile')
+            throw new Error("No Features in shapefile")
+          }else{
+            $("#thegeojson").text(shp_GeoJSON)
+          }
+        });
+      }
+
+      function inspectZipFile(file){
 
         return JSZip.loadAsync(file)
             .then(function(zip) {
@@ -69,35 +83,19 @@
 
               needsExt = checkfile(zip);
 
-              console.log(needsExt.length)
               if (needsExt.length >= 1){
                 $("#thegeojson").text("The zip file is missing files with these extensions: " + needsExt)
                 throw new Error("The zip file is missing files with these extensions: " + needsExt)
                 return needsExt
               }else{
-                shp(file).then(function(geoJson){
-                  shp_GeoJSON = JSON.stringify(geoJson)
-                  var errors = geojsonhint.hint(shp_GeoJSON);
-
-                  if(geoJson.features.length === 0){
-                    $("#thegeojson").text('No Features in shapefile')
-                    throw new Error("No Features in shapefile")
-
-                  }else{
-                    $("#thegeojson").text(shp_GeoJSON)
-                  }
-                });
+                convertToGeoJSON(file)
               }
-
-              return needsExt;
 
             }, function (e) {
               console.log("Error reading " + file.name + " : " + e.message)
             }).catch(function(e) {
               console.log("error getting zipfile " + e); // "oh, no!"
             })
-
-        //return needsExt
       }
 
 
@@ -106,15 +104,11 @@
               return;
           }
           else {
-              //console.log(this.result)
-              convertToGeoJSON(this.result);
+              inspectZipFile(this.result);
           }
       }
 
       function handleZipFile(file) {
-
-
-
           var reader = new FileReader();
           reader.onload = readerLoad;
           return reader.readAsArrayBuffer(file);
