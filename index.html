@@ -64,7 +64,7 @@
       function convertToGeoJSON(data){
         shp(data).then(function(geoJson){
           shp_GeoJSON = JSON.stringify(geoJson)
-          var errors = geojsonhint.hint(shp_GeoJSON);
+          var errors = geojsonhint.hint(shp_GeoJSON); 
 
           if(geoJson.features.length === 0){
             $("#thegeojson").text('No Features in shapefile')
