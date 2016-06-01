@@ -64,8 +64,8 @@
 
               console.log(needsExt.length)
               if (needsExt.length > 1){
-                $("#thegeojson").text("missing files with these extensions: " + needsExt)
-                throw new Error("missing files with these extensions: " + needsExt)
+                $("#thegeojson").text("The zip file is missing files with these extensions: " + needsExt)
+                throw new Error("The zip file is missing files with these extensions: " + needsExt)
                 return needsExt
               }else{
                 shp(file).then(function(geoJson){
