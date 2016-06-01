@@ -47,13 +47,14 @@
       function checkfile(zip){
         var MustHaveExt = ['prj','dbf','shp'];
         var hasExt = [];
+        var needsExt = [];
 
         zip.forEach(function (relativePath, zipEntry) {
           var ext = zipEntry.name.slice(-3).toLowerCase();
           hasExt.push(ext);
         });
 
-        var needsExt = MustHaveExt.filter(function(val) {
+        needsExt = MustHaveExt.filter(function(val) {
           return hasExt.indexOf(val) == -1;
         });
 
