@@ -47,14 +47,13 @@
       function checkfile(zip){
         var MustHaveExt = ['prj','dbf','shp'];
         var hasExt = [];
-        var needsExt = [];
 
         zip.forEach(function (relativePath, zipEntry) {
           var ext = zipEntry.name.slice(-3).toLowerCase();
           hasExt.push(ext);
         });
 
-        needsExt = MustHaveExt.filter(function(val) {
+        var needsExt = MustHaveExt.filter(function(val) {
           return hasExt.indexOf(val) == -1;
         });
 
@@ -65,6 +64,11 @@
         shp(data).then(function(geoJson){
           shp_GeoJSON = JSON.stringify(geoJson)
           var errors = geojsonhint.hint(shp_GeoJSON);
+
+          if (errors.length === 0){
+            $("#thegeojson").text(errors)
+            throw new Error(errors)
+          }
 
           if(geoJson.features.length === 0){
             $("#thegeojson").text('No Features in shapefile')
@@ -79,7 +83,6 @@
 
         return JSZip.loadAsync(file)
             .then(function(zip) {
-              var dateAfter = new Date();
 
               needsExt = checkfile(zip);
 
