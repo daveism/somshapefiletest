@@ -44,8 +44,19 @@
   <script src="js/geojsonhint.js"></script>
       <script>
 
-      function checkfile(file){
-        var MustHaveExt = ['prj','dbf','shp']
+      function checkfile(zip){
+        var MustHaveExt = ['prj','dbf','shp'];
+        var hasExt = []
+
+        zip.forEach(function (relativePath, zipEntry) {
+          var ext = zipEntry.name.slice(-3).toLowerCase();
+          hasExt.push(ext);
+        });
+
+        return hasExt
+      }
+
+      function convertToGeoJSON(file){
         var hasExt = []
         var needsExt = []
 
@@ -53,10 +64,7 @@
             .then(function(zip) {
               var dateAfter = new Date();
 
-              zip.forEach(function (relativePath, zipEntry) {
-                var ext = zipEntry.name.slice(-3).toLowerCase();
-                hasExt.push(ext);
-              });
+              hasExt = checkfile(zip);
 
               needsExt = MustHaveExt.filter(function(val) {
                 return hasExt.indexOf(val) == -1;
@@ -95,29 +103,14 @@
         //return needsExt
       }
 
-      function data(data) {
 
-            checkfile(data);
-
-            // shp(data).then(function(geoJson){
-            //   shp_GeoJSON = JSON.stringify(geoJson)
-            //   var errors = geojsonhint.hint(shp_GeoJSON);
-            //
-            //   if(geoJson.features.length === 0){
-            //     $("#thegeojson").text('No features')
-            //   }else{
-            //     $("#thegeojson").text(shp_GeoJSON)
-            //   }
-            // });
-
-      }
       function readerLoad() {
           if (this.readyState !== 2 || this.error) {
               return;
           }
           else {
               //console.log(this.result)
-              data(this.result);
+              convertToGeoJSON(this.result);
           }
       }
 
